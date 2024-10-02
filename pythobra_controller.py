@@ -14,6 +14,7 @@ class PythobraApp:
         self.frontend.solve_equation_button.clicked.connect(self.solve_equation)
 
         self.frontend.settings_button.clicked.connect(self.open_settings_dialog)
+        self.frontend.triangle_solver.clicked.connect(self.triangle_solver)
 
     def solve_equation(self):
         equation = self.frontend.equation_text_field.text()
@@ -36,7 +37,11 @@ class PythobraApp:
         self.frontend.output_text_field.appendPlainText(
             "No more Rickrolling. Get me out of here!"
         )
-
+    def triangle_solver(self):
+        self.triangle_solver_interface = pythobra_frontend.Triange_solver_class()
+        widget=self.triangle_solver_interface
+        widget.show()
+        #self.triangle_solver_interface.pen()
 
 if __name__ == "__main__":
     qt_app = QW.QApplication.instance()

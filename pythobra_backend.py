@@ -43,3 +43,6 @@ class PythobraBackend:
         show_legend,
     ):
         pass
+
+    def triangle_solver(self,a,b,c,A,B,C):
+        pass
