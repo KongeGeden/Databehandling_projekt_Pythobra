@@ -41,6 +41,13 @@ class PythobraApp:
         self.triangle_solver_interface = pythobra_frontend.Triange_solver_class()
         widget=self.triangle_solver_interface
         widget.show()
+        self.triangle_solver_interface.button_løs_trekant.clicked.connect(self.triangle_solver_2)
+    
+    def triangle_solver_2(self):
+        #værdier=
+        print(self.triangle_solver_interface.giv_værdier())
+        nye_værdier=self.backend()
+        
         #self.triangle_solver_interface.pen()
 
 if __name__ == "__main__":

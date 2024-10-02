@@ -86,13 +86,19 @@ class Triange_solver_class(QW.QWidget):
     def __init__(self, parent=None):
         QW.QWidget.__init__(self, parent)
         self.setWindowTitle("Triangle solver")
-        self.vertical_layout = QW.QVBoxLayout()
-        self.setLayout(self.vertical_layout)
+        #self.vertical_layout = QW.QVBoxLayout()
+        #self.setLayout(self.vertical_layout)
         #Pen der virker på en måde
         self.pen = QPen(QColor(0, 0, 0))  # set lineColor
         self.pen.setWidth(3)  # set lineWidth
         self.brush = QBrush(QColor(255, 255, 255, 255))  # set fillColor
         self.polygon = self.createPoly(150, 200, 250,1,29,150)
+        
+        self.layout=QW.QVBoxLayout(self)
+        self.button_løs_trekant=QW.QPushButton("Beregn trekant",self)
+        self.layout.addWidget(self.button_løs_trekant)
+        
+        
 
 
 
@@ -110,12 +116,23 @@ class Triange_solver_class(QW.QWidget):
 
 
 
-        a_text= Trekant_label("a=",self)
-        print(a_text)
-        a_text.move(int(point1.x()), int(point1.y()))
-        print(a_text.x)
-
-
+        self.a_text= Trekant_label("a=",self)
+        self.A_text=Trekant_label("A=",self)
+        self.a_text.move(int(point1.x()), int(point1.y()))
+        self.A_text.move(int(point1.x()), int(point1.y())-self.a_text.height())
+        #b
+        self.b_text= Trekant_label("b=",self)
+        self.B_text=Trekant_label("B=",self)
+        self.b_text.move(int(point2.x()), int(point2.y()))
+        self.B_text.move(int(point2.x()), int(point2.y())-self.b_text.height())
+        #c
+        self.c_text= Trekant_label("c=",self)
+        self.C_text=Trekant_label("C=",self)
+        self.c_text.move(int(point3.x()), int(point3.y()))
+        self.C_text.move(int(point3.x()), int(point3.y())-self.c_text.height())
+        self.liste_af_vinkler=[self.A_text,self.B_text,self.C_text]
+        self.liste_af_sider=[self.a_text,self.b_text,self.c_text]
+        
 
         return trekant
 
@@ -124,16 +141,30 @@ class Triange_solver_class(QW.QWidget):
         painter.setPen(self.pen)
         painter.setBrush(self.brush)
         painter.drawPolygon(self.polygon)
+    
+    def giv_værdier(self):
+        self.værdi_vinker=[]
+        self.værdi_sider=[]
+        #Tag vinkler og værider og gpår mehtondern der tag ting af boksen
+        for tal in self.liste_af_vinkler:
+            tal=tal.tag_værdi()
+            self.værdi_vinker.append(tal)
+        
+        for tal in self.liste_af_sider:
+            tal=tal.tag_værdi()
+            self.værdi_sider.append(tal)
+        return self.værdi_sider,self.værdi_vinker
+        
 
 class Trekant_label(QW.QWidget):
-    def __init__(self,navn,vindue,parent=None):
+    def __init__(self,navn,parent=None):
         super().__init__(parent)
         layout = QW.QHBoxLayout(self)
         self._label = QW.QLabel(navn,self)
         layout.addWidget(self._label)
 
-        self._lineeidt = QW.QLineEdit(self)
-        layout.addWidget(self._lineeidt)
+        self._lineedit = QW.QLineEdit(self)
+        layout.addWidget(self._lineedit )
         self.setLayout(layout)
-    def print_test(self):
-        print((self._lineeidt.text()))
+    def tag_værdi(self):
+        return self._lineedit.text()

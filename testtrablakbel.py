@@ -24,5 +24,8 @@ class Trekant_label(QtWidgets.QWidget):
 
 app = QtWidgets.QApplication(sys.argv)
 volume = Trekant_label("a=")
+hej=Trekant_label("b=")
+he2j=Trekant_label("c=")
+hej.show()
 volume.show()
 app.exec()
